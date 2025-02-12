@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
-    "android": "DARK_MODE=media expo start --android",
+    "android": "set DARK_MODE=media & expo start --android",
+    "dev": "expo start --android",
     "ios": "DARK_MODE=media expo start --ios",
     "start": "expo start",
     "prebuild": "expo prebuild",
@@ -14,6 +15,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@faker-js/faker": "^9.5.0",
+    "@gluestack-ui/button": "^1.0.8",
     "@gluestack-ui/icon": "^0.1.25",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
     "@gluestack-ui/overlay": "^0.1.16",
@@ -21,6 +24,7 @@
     "@react-navigation/native": "^7.0.3",
     "@tanstack/react-query": "^5.66.0",
     "babel-plugin-module-resolver": "^5.0.2",
+    "date-fns": "^4.1.0",
     "expo": "^52.0.32",
     "expo-constants": "~17.0.5",
     "expo-linking": "~7.0.5",

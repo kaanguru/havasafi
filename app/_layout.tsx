@@ -3,21 +3,35 @@ import '@/global.css';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
 
+import { Box } from '@/components/ui/box';
+import { Button, ButtonText } from '@/components/ui/button';
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-const [colorMode, setColorMode] = useState<'light' | 'dark'>('light');
-
 export default function RootLayout() {
+  const [colorMode, setColorMode] = useState<'light' | 'dark'>('light');
   return (
-    <GluestackUIProvider mode={colorMode}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </GluestackUIProvider>
+    <>
+      <Box className="bg-primary m-0 h-6 p-0 dark:bg-slate-300">
+        <Button
+          size="sm"
+          variant="solid"
+          action="primary"
+          onPress={() => {
+            setColorMode(colorMode === 'light' ? 'dark' : 'light');
+          }}>
+          <ButtonText>Toggle color mode</ButtonText>
+        </Button>
+      </Box>
+      <GluestackUIProvider mode={colorMode}>
+        <Stack>
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack>
+      </GluestackUIProvider>
+    </>
   );
 }
