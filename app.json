@@ -3,7 +3,7 @@
     "name": "havasafi",
     "slug": "havasafi",
     "version": "1.0.0",
-
+    "newArchEnabled": true,
     "scheme": "havasafi",
     "web": {
       "bundler": "metro",
