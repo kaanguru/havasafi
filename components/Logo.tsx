@@ -4,7 +4,7 @@ export default function Logo() {
   return (
     <LottieView
       source={require('~/assets/lottie/logo-renkli.json')}
-      style={{ width: '100%', height: '100%' }}
+      style={{ width: '66%', height: '66%' }}
       autoPlay
       loop
     />

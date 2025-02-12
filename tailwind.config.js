@@ -160,8 +160,8 @@ module.exports = {
           muted: 'rgb(var(--color-background-muted)/<alpha-value>)',
           success: 'rgb(var(--color-background-success)/<alpha-value>)',
           info: 'rgb(var(--color-background-info)/<alpha-value>)',
-          light: '#FBFBFB',
-          dark: '#181719',
+          light: '#F7F5FB',
+          dark: '#271501',
         },
         indicator: {
           primary: 'rgb(var(--color-indicator-primary)/<alpha-value>)',
@@ -170,10 +170,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        heading: undefined,
-        body: undefined,
+        heading: ['Teko_400Regular', 'sans-serif'],
+        body: ['Inter_900Black', 'sans-serif'],
         mono: undefined,
-        roboto: ['Roboto', 'sans-serif'],
+        roboto: ['Roboto_400Regular', 'sans-serif'],
       },
       fontWeight: {
         extrablack: '950',

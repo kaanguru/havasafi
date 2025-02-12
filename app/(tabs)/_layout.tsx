@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
+import { Rainbow, ThermometerSun } from 'lucide-react-native';
 
-import { HeaderButton } from '~/components/HeaderButton';
-import { TabBarIcon } from '~/components/TabBarIcon';
+import { Icon } from '~/components/ui/icon';
 
 export default function TabLayout() {
   return (
@@ -13,15 +13,20 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Kalite',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => <HeaderButton />,
+          headerTitleStyle: {
+            fontFamily: 'Teko_400Regular',
+          },
+          headerStyle: {
+            backgroundColor: '#00AD46',
+          },
+          tabBarIcon: () => <Icon className="text-typography-500" as={Rainbow} size="md" />,
         }}
       />
       <Tabs.Screen
         name="isi"
         options={{
           title: 'Isı',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: () => <Icon className="text-typography-500" as={ThermometerSun} size="md" />,
         }}
       />
     </Tabs>

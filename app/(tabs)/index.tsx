@@ -2,12 +2,13 @@ import { Stack } from 'expo-router';
 import { View } from 'react-native';
 
 import Logo from '~/components/Logo';
+import { Box } from '~/components/ui/box';
 
 export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Kalite' }} />
-      <View className="flex-1 items-center justify-center bg-primary-0 dark:bg-primary-500">
+      <View className="m-4 flex-1 items-center bg-background-light dark:bg-background-dark">
         <Logo />
       </View>
     </>
