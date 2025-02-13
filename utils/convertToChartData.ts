@@ -1,50 +1,29 @@
-import * as R from 'ramda';
+import { format } from 'date-fns';
 
-interface DataPoint {
-  data: {
-    Temperature?: number;
-  };
-}
-
-interface InputData {
-  [timestamp: string]: DataPoint;
-}
-
-interface ChartData {
-  labels: string[];
-  datasets: {
-    data: number[];
-  }[];
-}
+import { InputData, ChartData } from '~/types';
 
 export function convertToChartData(inputData: InputData): ChartData {
   const timestamps = Object.keys(inputData).sort();
 
-  const getTemperature = R.pipe(
-    (timestamp: string) => inputData[timestamp],
-    R.path(['data', 'Temperature']),
-    R.defaultTo(undefined)
-  );
+  const getTemperature = (timestamp: string) => {
+    return inputData[timestamp]?.data?.Temperature;
+  };
 
   const isValidDataPoint = (timestamp: string) => {
     const temperature = getTemperature(timestamp);
     return temperature !== undefined;
   };
 
-  const filteredTimestamps = R.filter(isValidDataPoint, timestamps);
+  const filteredTimestamps = timestamps.filter(isValidDataPoint);
 
-  const temperatureData = R.map(
-    (timestamp: string) => getTemperature(timestamp) as number,
-    filteredTimestamps
+  const temperatureData = filteredTimestamps.map(
+    (timestamp: string) => getTemperature(timestamp) as number
   );
 
-  const labels = R.map((timestamp: string) => {
+  const labels = filteredTimestamps.map((timestamp: string) => {
     const date = new Date(parseFloat(timestamp) * 1000);
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    return `${date.toLocaleDateString()}-${hours}:${minutes}:${seconds}`;
-  }, filteredTimestamps);
+    return format(date, 'yyyy-MM-dd-HH:mm:ss');
+  });
 
   return {
     labels,
