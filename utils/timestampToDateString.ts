@@ -10,7 +10,7 @@ function unixTimestampToDateStringMS(timestamp: number): string {
   const date = new Date(timestamp);
   return format(date, 'yyyy-MM-DD');
 }
-
+export { unixTimestampToDateString, unixTimestampToDateStringMS };
 // Usage:
 /* const timestampSeconds = 1739318442; // 1739318442 saniye
 const formattedDateSeconds = unixTimestampToDateString(timestampSeconds);

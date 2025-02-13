@@ -1,15 +1,15 @@
 import '@/global.css';
 
+import { Inter_900Black, useFonts } from '@expo-google-fonts/inter';
+import { Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import { Teko_400Regular } from '@expo-google-fonts/teko';
 import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { useState, useEffect } from 'react';
 
 import { Box } from '@/components/ui/box';
-import { Button, ButtonIcon, ButtonText } from '@/components/ui/button';
+import { Button, ButtonIcon } from '@/components/ui/button';
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
-import { Inter_900Black, useFonts } from '@expo-google-fonts/inter';
-import { Teko_400Regular } from '@expo-google-fonts/teko';
-import { Roboto_400Regular } from '@expo-google-fonts/roboto';
-import * as SplashScreen from 'expo-splash-screen';
 import { MoonIcon, SunIcon } from '~/components/ui/icon';
 
 SplashScreen.preventAutoHideAsync();
@@ -19,6 +19,7 @@ export default function RootLayout() {
     Inter_900Black,
     Teko_400Regular,
     Roboto_400Regular,
+    Roboto_700Bold,
   });
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function RootLayout() {
   }
   return (
     <>
-      <Box className="absolute right-1 top-1 z-20 m-0 h-6 w-6 ">
+      <Box className="absolute right-4 top-4 z-20 m-0 h-8 w-8 ">
         <Button
           size="sm"
           variant="solid"
