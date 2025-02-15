@@ -1,5 +1,6 @@
 interface DataPoint {
   data: {
+    Humidity?: number;
     Temperature?: number;
   };
 }
