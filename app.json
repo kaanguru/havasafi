@@ -19,12 +19,14 @@
       "tsconfigPaths": true
     },
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons/adaptive-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icons/splash-icon-light.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F7F5FB",
+      "imageDark": "./assets/icons/splash-icon-dark.png",
+      "backgroundColorDark": "#271501"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -35,7 +37,16 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#F7F5FB"
+      },
+      "package": "com.kaanguru.havasafi"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "52f579fa-61f8-4f3e-aef1-af870753a48a"
       }
     }
   }
