@@ -17,7 +17,7 @@ export default function TabLayout() {
           options={{
             title: 'Kalite',
             headerShown: false,
-            tabBarIcon: () => <Icon className="  text-typography-500" as={Rainbow} size="md" />,
+            tabBarIcon: () => <Icon className="text-typography-500" as={Rainbow} size="md" />,
           }}
         />
         <Tabs.Screen
