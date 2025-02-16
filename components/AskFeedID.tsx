@@ -17,7 +17,7 @@ export default function AskFeedID({ onSubmit, onError }: AskFeedIDProps) {
   const handleSubmit = async () => {
     try {
       if (!inputValue.trim()) {
-        throw new Error('Feed ID cannot be empty');
+        throw new Error('Cihaz numarası boş olamaz');
       }
 
       await onSubmit(inputValue.trim());
@@ -43,7 +43,7 @@ export default function AskFeedID({ onSubmit, onError }: AskFeedIDProps) {
       {validationError && <Text className="text-red-500">{validationError}</Text>}
 
       <Button onPress={handleSubmit}>
-        <ButtonText>Gönder</ButtonText>
+        <ButtonText>Kayıt Ol</ButtonText>
       </Button>
     </VStack>
   );

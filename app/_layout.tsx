@@ -7,6 +7,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Moon, Sun } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 
+import { FeedIDProvider } from '../context/FeedIDContext';
+
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { Box } from '~/components/ui/box';
 import { Button, ButtonIcon } from '~/components/ui/button';
@@ -33,25 +35,27 @@ export default function RootLayout() {
   }
   return (
     <GluestackUIProvider mode={colorMode}>
-      <Box className="absolute right-5 top-1 z-10 h-4 w-5 bg-background-light dark:bg-background-dark">
-        <Button
-          onPress={() => {
-            setColorMode(colorMode === 'light' ? 'dark' : 'light');
-          }}>
-          <ButtonIcon as={colorMode === 'light' ? Moon : Sun} />
-        </Button>
-      </Box>
-      <Stack>
-        <Stack.Screen
-          name="(tabs)"
-          options={{
-            headerShown: false,
-            contentStyle: {
-              backgroundColor: colorMode === 'light' ? '#F7F5FB' : '#5B150B',
-            },
-          }}
-        />
-      </Stack>
+      <FeedIDProvider>
+        <Box className="absolute right-5 top-1 z-10 h-4 w-5 bg-background-light dark:bg-background-dark">
+          <Button
+            onPress={() => {
+              setColorMode(colorMode === 'light' ? 'dark' : 'light');
+            }}>
+            <ButtonIcon as={colorMode === 'light' ? Moon : Sun} />
+          </Button>
+        </Box>
+        <Stack>
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: false,
+              contentStyle: {
+                backgroundColor: colorMode === 'light' ? '#F7F5FB' : '#5B150B',
+              },
+            }}
+          />
+        </Stack>
+      </FeedIDProvider>
     </GluestackUIProvider>
   );
 }

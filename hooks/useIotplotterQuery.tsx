@@ -16,8 +16,22 @@ export default function useIotplotterQuery(day?: number | undefined) {
 }
 async function fetchTimeseries(epoch: number | undefined = epochOfToday) {
   const feedID = await getFeedID();
-  const response = await fetch(
-    `https://iotplotter.com/api/v2/feed/${feedID}?epoch=${epoch}&offset=${offset}`
-  );
-  return response.json();
+  const url = `https://iotplotter.com/api/v2/feed/${feedID}?epoch=${epoch}&offset=${offset}`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const responseData = await response.text();
+
+  if (responseData.includes('Nothing for that time')) {
+    throw new Error('Nothing for that time');
+  }
+
+  try {
+    return JSON.parse(responseData);
+  } catch (error) {
+    throw new Error('Invalid data format received' + error);
+  }
 }

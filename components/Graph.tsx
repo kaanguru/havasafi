@@ -1,10 +1,13 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { format, startOfToday } from 'date-fns';
-import { Calendar } from 'lucide-react-native';
+import { AlertCircle, Calendar } from 'lucide-react-native';
 import { useState } from 'react';
-import { Dimensions, SafeAreaView } from 'react-native';
+import { Alert, Dimensions, SafeAreaView } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import colors from 'tailwindcss/colors';
+
+import ErrorState from './ErrorState';
 
 import { Button, ButtonIcon, ButtonText } from '~/components/ui/button';
 import { Spinner } from '~/components/ui/spinner';
@@ -33,7 +36,14 @@ export default function GraphScreen({ graphType }: { graphType: 'temperature' | 
       is24Hour: true,
     });
   };
-
+  const resetFeedID = async () => {
+    try {
+      await AsyncStorage.removeItem('feedID');
+      Alert.alert('ID sıfırlama başarılı');
+    } catch (error) {
+      console.error('Error resetting feedID:', error);
+    }
+  };
   const chartConfig = {
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     style: {
@@ -50,21 +60,36 @@ export default function GraphScreen({ graphType }: { graphType: 'temperature' | 
       stroke: '#aaff26',
     },
   };
+  const chartTitle = graphType === 'temperature' ? 'Isı Grafiği' : 'Nem Grafiği';
   if (isPending) {
     return (
-      <VStack className="flex-1 items-center justify-center bg-background-light dark:bg-background-dark">
+      <VStack className=" mt-6 flex-1 items-center justify-center bg-background-light dark:bg-background-dark">
         <Spinner size="large" color={colors.gray[500]} />
       </VStack>
     );
   }
 
-  if (isError) {
+  if (isError || !data) {
     return (
-      <VStack className="flex-1 items-center justify-center bg-background-light dark:bg-background-dark">
-        <Text>Error: {error.message}</Text>
+      <VStack className="mt-4 flex-1 items-center justify-center bg-background-light dark:bg-background-dark">
+        <ErrorState
+          error={
+            error?.message?.includes('Nothing for that time')
+              ? 'Veri bulunamadı. Lütfen daha sonra tekrar deneyiniz.'
+              : 'Veri yüklenemedi. Lütfen daha sonra tekrar deneyiniz.'
+          }
+        />
+        <Button
+          onPress={resetFeedID}
+          variant="outline"
+          className="mt-20 bg-background-light dark:bg-background-dark">
+          <ButtonIcon as={AlertCircle} size="md" />
+          <ButtonText> ID'yi sıfırla ve yeniden gir</ButtonText>
+        </Button>
       </VStack>
     );
   }
+
   return (
     <>
       <VStack className="h-full items-center justify-start bg-background-light dark:bg-background-dark">
@@ -75,7 +100,11 @@ export default function GraphScreen({ graphType }: { graphType: 'temperature' | 
           </Button>
           <Text className="mx-2 text-typography-500">{format(selectedDate, 'dd. MM. yyyy')}</Text>
         </SafeAreaView>
-        {data && (
+        <Text bold size="lg" className=" mb-4 text-typography-500">
+          {chartTitle}
+        </Text>
+
+        {data ? (
           <LineChart
             data={{
               labels: data.labels,
@@ -91,6 +120,8 @@ export default function GraphScreen({ graphType }: { graphType: 'temperature' | 
             withHorizontalLabels
             bezier
           />
+        ) : (
+          <ErrorState error="Veri bulunamadı. Lütfen daha sonra tekrar deneyiniz." />
         )}
       </VStack>
     </>
