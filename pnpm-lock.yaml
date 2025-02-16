@@ -138,6 +138,9 @@ importers:
       '@babel/core':
         specifier: ^7.26.9
         version: 7.26.9
+      '@types/node':
+        specifier: ^22.13.4
+        version: 22.13.4
       '@types/react':
         specifier: ~18.3.18
         version: 18.3.18
