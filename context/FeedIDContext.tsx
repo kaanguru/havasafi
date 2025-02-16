@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const FEED_ID_REGEX = /^\d{5,}$/;
+export const FEED_ID_REGEX = /^\d{5,}$/;
 
 type FeedIDContextType = {
   feedIDExists: boolean;

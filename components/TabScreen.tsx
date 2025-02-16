@@ -29,10 +29,10 @@ export default function TabScreen({
       <VStack className="items-center justify-start bg-background-light dark:bg-background-dark">
         {!feedIDExists ? (
           <>
-            <Logo />
-            <Box className="bg-background-100 p-5">
-              <AskFeedID onSubmit={handleFeedIDSubmit} onError={(message) => message} />
+            <Box className="h-1/3 w-full items-center justify-center">
+              <Logo />
             </Box>
+            <AskFeedID onSubmit={handleFeedIDSubmit} onError={(message) => message} />
           </>
         ) : (
           <GraphScreen graphType={graphType} />
