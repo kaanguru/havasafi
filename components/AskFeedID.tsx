@@ -54,7 +54,7 @@ export default function AskFeedID({ onSubmit, onError }: AskFeedIDProps) {
   };
 
   return (
-    <VStack className="w-full p-4" space="md">
+    <VStack className="w-full bg-background-light p-4 dark:bg-background-dark" space="md">
       <Text size="lg" className=" text-center text-typography-500">
         Lütfen cihaz numaranızı girin
       </Text>
